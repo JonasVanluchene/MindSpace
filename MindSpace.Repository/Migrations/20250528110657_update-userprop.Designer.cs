@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MindSpace.Repository;
 
@@ -11,9 +12,11 @@ using MindSpace.Repository;
 namespace MindSpace.Repository.Migrations
 {
     [DbContext(typeof(MindSpaceDbContext))]
-    partial class MindSpaceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250528110657_update-userprop")]
+    partial class updateuserprop
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
