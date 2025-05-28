@@ -12,9 +12,10 @@ namespace MindSpace.Model
     public class User : IdentityUser
     {
         
+        public string? AvatarUrl { get; set; }
 
-        public required  string Name { get; set; }
-        public required string AvatarUrl { get; set; }
+        public bool Newsletter { get; set; }
+
 
         public List<JournalEntry> JournalEntries { get; set; } = new();
     }

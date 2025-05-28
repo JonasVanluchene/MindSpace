@@ -19,4 +19,8 @@
     <ProjectReference Include="..\MindSpace.Services\MindSpace.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\avatar\" />
+  </ItemGroup>
+
 </Project>

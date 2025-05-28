@@ -1,0 +1,71 @@
+﻿@model MindSpace.Presentation.Mvc.Models.Identity.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+
+<h1>Registreer</h1>
+
+<form id="registerForm" method="post" enctype="multipart/form-data">
+    <h2>Registreer op de website</h2>
+    
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    
+    <fieldset class="border p-3 mb-3">
+        <legend class="w-auto px-2">Personal Info</legend>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="UserName" class="form-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+        <div class="form-floating mb-3">
+            <input asp-for="Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+            <label asp-for="Password">Password</label>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+            <label asp-for="ConfirmPassword">Confirm Password</label>
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+        </div>
+    </fieldset>
+    
+    <fieldset>
+        <div class="row mb-3">
+            <label asp-for="ImageFile" class="form-label">Image</label>
+            <input type="file" asp-for="ImageFile" class="form-control" />
+            <span asp-validation-for="ImageFile" class="text-danger small"></span>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <div class="form-check">
+                    <input asp-for="NewsLetter" class="form-check-input"/>
+                    <label asp-for="NewsLetter" class="form-check-label"></label>
+                </div>
+                <span asp-validation-for="NewsLetter" class="text-danger"></span>
+            </div>
+        </div>
+    </fieldset>
+    <div>
+        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+    </div>
+    <div>
+        <p>
+            <a asp-action="SignIn" asp-route-returnUrl="@ViewBag.ReturnUrl">I already have an account</a>
+        </p>
+    </div>
+</form>

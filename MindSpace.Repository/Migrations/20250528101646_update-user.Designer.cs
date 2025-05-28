@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MindSpace.Repository;
 
@@ -11,9 +12,11 @@ using MindSpace.Repository;
 namespace MindSpace.Repository.Migrations
 {
     [DbContext(typeof(MindSpaceDbContext))]
-    partial class MindSpaceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250528101646_update-user")]
+    partial class updateuser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -262,6 +265,7 @@ namespace MindSpace.Repository.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("AvatarUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -280,9 +284,6 @@ namespace MindSpace.Repository.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<bool>("Newsletter")
-                        .HasColumnType("bit");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)

@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using MindSpace.Model
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+
+
+<ul class="navbar-nav">
+    
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li>
+            <img src="@user.AvatarUrl" alt="Avatar"
+                 class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;" />
+        </li>
+        <li class="nav-item">
+            <span class="nav-link text-dark">Hello @User.Identity?.Name!</span>
+        </li>
+        <li class="nav-item">
+            <form method="post" class="form-inline" asp-area="" asp-controller="Identity" asp-action="Logout">
+                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Identity" asp-action="Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Identity" asp-action="SignIn">Login</a>
+        </li>
+    }
+</ul>
