@@ -1,95 +1,95 @@
-🧠 Assignment: MindSpace – A Personal Journal & Mood Tracker
-📌 Scenario
+# 🧠 Assignment: MindSpace – A Personal Journal & Mood Tracker
+## 📌 Scenario
 Build a private web app for users to track their daily moods, write journal entries, and reflect on patterns over time. This is a calm, introspective tool designed to help users understand their mental well-being.
 
-🎯 Learning Goals
+## 🎯 Learning Goals
 This project helps you practice:
 
-Entity Relationships (1-to-many, many-to-many)
+- Entity Relationships (1-to-many, many-to-many)
 
-Authentication and Authorization (only view your own data)
+- Authentication and Authorization (only view your own data)
 
-File upload (optional: upload an image per entry)
+- File upload (optional: upload an image per entry)
 
-CRUD operations with validation
+- CRUD operations with validation
 
-Using services, DTOs, and ViewModels
+- Using services, DTOs, and ViewModels
 
-Date filtering and searching
+- Date filtering and searching
 
-Optional charting (mood over time)
+- Optional charting (mood over time)
 
-🏗️ Functional Requirements
-Users
-Register/login/logout
+## 🏗️ Functional Requirements
+- Users
+  - Register/login/logout
 
-Update profile and avatar
+  - Update profile and avatar
 
-Journal Entries
-Create/Edit/Delete entries
+- Journal Entries
+  - Create/Edit/Delete entries
 
-Each entry has:
+  - Each entry has:
 
-Date
+    - Date
 
-Title
+    - Title
 
-Content
+    - Content
 
-Mood (dropdown: Happy, Sad, Angry, Calm, Anxious, etc.)
+- Mood (dropdown: Happy, Sad, Angry, Calm, Anxious, etc.)
 
-Tags (like “Work”, “Family”, “Health” — optional many-to-many)
+- Tags (like “Work”, “Family”, “Health” — optional many-to-many)
 
-Filter by date, mood, or tag
+- Filter by date, mood, or tag
 
-View mood trends (optional chart)
+- View mood trends (optional chart)
 
-Reflection Questions (optional feature)
-Each day presents a rotating reflection question (e.g., “What made you smile today?”)
+- Reflection Questions (optional feature)
+    - Each day presents a rotating reflection question (e.g., “What made you smile today?”)
 
-Users can optionally answer it with their entry
+- Users can optionally answer it with their entry
 
-🗃️ Suggested Data Model
-User (Identity)
-Name
+## 🗃️ Suggested Data Model
+### User (Identity)
+- Name
 
-Email
+- Email
 
-AvatarUrl
+- AvatarUrl
 
-JournalEntry
-Id
+### JournalEntry
+- Id
 
-Title
+- Title
 
-Content
+- Content
 
-Date
+- Date
 
-Mood (enum or string)
+- Mood (enum or string)
 
-UserId (FK)
+- UserId (FK)
 
-Tags (many-to-many)
+- Tags (many-to-many)
 
-Tag
-Id
+### Tag
+- Id
 
-Name
+- Name
 
-JournalTag
-JournalEntryId
+### JournalTag
+- JournalEntryId
 
-TagId
+- TagId
 
-ReflectionQuestion
-Id
+### ReflectionQuestion
+- Id
 
-QuestionText
+- QuestionText
 
-(Optional: DisplayFrequency or DateAdded)
+- (Optional: DisplayFrequency or DateAdded)
 
-🛠️ Technical Requirements
+## 🛠️ Technical Requirements
 ASP.NET Core MVC
 
 EF Core + Migrations
@@ -104,7 +104,7 @@ Partial Views for Journal List, Mood Selector
 
 Optional: chart (e.g. mood over last 30 days using Chart.js or Razor components)
 
-✨ Bonus Features
+## ✨ Bonus Features
 Export journal entries as PDF or text
 
 Mood chart with filter (last week/month/year)
