@@ -11,6 +11,8 @@ namespace MindSpace.Model
     public class JournalEntryTag
     {
         public int Id { get; set; }
+
+        public int JournalEntryId { get; set; }
         public JournalEntry JournalEntry { get; set; }
 
         public int TagId { get; set; }

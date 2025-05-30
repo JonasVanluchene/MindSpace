@@ -4,7 +4,11 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @{
-    var user = await UserManager.GetUserAsync(User);
+    User? user = null;
+    if (SignInManager.IsSignedIn(User))
+    {
+        user = await UserManager.GetUserAsync(User);
+    }
 }
 
 

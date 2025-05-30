@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MindSpace.Model;
+using MindSpace.Presentation.Mvc.Helpers.Database;
 using MindSpace.Repository;
+using MindSpace.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +39,8 @@ builder.Services.AddDbContext<MindSpaceDbContext>(options =>
 });
 
 
+builder.Services.AddScoped<JournalEntryService>();
+builder.Services.AddScoped<TagService>();
 
 
 var app = builder.Build();
@@ -54,7 +58,7 @@ else
     using (var scope = app.Services.CreateScope())
     {
         var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
+        
         string[] roleNames = { "Admin", "User" }; // Add roles as needed
 
         foreach (var roleName in roleNames)
@@ -65,6 +69,11 @@ else
                 await roleManager.CreateAsync(new IdentityRole(roleName));
             }
         }
+
+
+
+        var tagService = scope.ServiceProvider.GetRequiredService<TagService>(); // Get from scope
+        await SeedDatabaseHelper.SeedPredefinedTags(tagService);
     }
 }
 
