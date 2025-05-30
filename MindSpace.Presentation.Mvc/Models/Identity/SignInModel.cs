@@ -6,8 +6,8 @@ namespace MindSpace.Presentation.Mvc.Models.Identity
     {
 
         [Required]
-        [EmailAddress]
-        public required string Email { get; set; }
+        
+        public required string Login { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
