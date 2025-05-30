@@ -32,7 +32,7 @@ namespace MindSpace.Services
 
         public async Task<JournalEntry?> Get(int id)
         {
-            var journalEntry = await _dbContext.JournalEntries.FirstOrDefaultAsync(b => b.Id == id);
+            var journalEntry = await _dbContext.JournalEntries.Include(j => j.JournalEntryTags).FirstOrDefaultAsync(j => j.Id == id);
             return journalEntry;
         }
 
@@ -44,22 +44,41 @@ namespace MindSpace.Services
             return journalEntry;
         }
 
-        public async Task<JournalEntry?> Update(int id, JournalEntry journalEntry)
+        public async Task<JournalEntry?> Update(int id, JournalEntry updatedData, List<int> selectedTagIds)
         {
-            var dbJournalEntry = await Get(id);
-            if (dbJournalEntry is null)
-            {
+            // Fetch the existing JournalEntry from the database, including its related tags
+            var dbEntry = await _dbContext.JournalEntries
+                .Include(j => j.JournalEntryTags)
+                .FirstOrDefaultAsync(j => j.Id == id);
+
+            if (dbEntry == null)
                 return null;
+
+            // TODO: Replace 'updatedData' with a dedicated DTO (e.g., JournalEntryUpdateDto)
+            // This will help decouple service layer from domain entities and improve maintainability.
+
+            // Update basic fields from the input (to be replaced by DTO properties)
+            dbEntry.Title = updatedData.Title;
+            dbEntry.Content = updatedData.Content;
+            dbEntry.Mood = updatedData.Mood;
+
+            // Clear existing tags and update with new ones based on selectedTagIds
+            // TODO: Consider including SelectedTagIds inside the DTO to avoid separate parameters
+            dbEntry.JournalEntryTags.Clear();
+            foreach (var tagId in selectedTagIds)
+            {
+                dbEntry.JournalEntryTags.Add(new JournalEntryTag
+                {
+                    JournalEntryId = id,
+                    TagId = tagId
+                });
             }
 
-            dbJournalEntry.Title = journalEntry.Title;
-            dbJournalEntry.Content = journalEntry.Content;
-            dbJournalEntry.Mood = journalEntry.Mood;
-            dbJournalEntry.JournalEntryTags = journalEntry.JournalEntryTags;
-
-
+            // Save changes to the database
             await _dbContext.SaveChangesAsync();
-            return dbJournalEntry;
+
+            // Return the updated entity (or consider returning a DTO instead)
+            return dbEntry;
         }
 
         public async Task Delete(int id)
