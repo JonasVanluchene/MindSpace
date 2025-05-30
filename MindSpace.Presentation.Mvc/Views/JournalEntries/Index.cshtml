@@ -1,0 +1,17 @@
+﻿@model MindSpace.Presentation.Mvc.Models.JournalEntry.UserJournalEntriesViewModel
+
+
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Your Mood Journal</h2>
+        <a asp-action="Create" class="btn btn-primary">+ Add Entry</a>
+    </div>
+
+    <div class="ibox-content forum-container p-0">
+        @foreach (var entry in Model.JournalEntriesViewModels)
+        {
+            <partial name="JournalEntryListItemPartial" model="entry" />
+        }
+    </div>
+</div>

@@ -1,0 +1,106 @@
+﻿@model MindSpace.Presentation.Mvc.Models.JournalEntry.CreateViewModel
+@{
+    ViewBag.Title = "Add Journal Entry";
+}
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <fieldset class="border p-3 mb-3">
+            <legend class="px-2">Journal Entry Details</legend>
+        
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        
+            <div class="mb-3">
+                <label asp-for="Content" class="form-label"></label>
+                <textarea asp-for="Content" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+        </fieldset>
+
+        <fieldset class="border p-3 mb-3">
+            <legend class="px-2">How are you feeling?</legend>
+            <div>
+                @foreach (var mood in Enum.GetValues<MindSpace.Model.Mood>())
+                {
+                    <div class="form-check form-check-inline mb-3">
+                        <input asp-for="Mood" type="radio" value="@mood" class="form-check-input" id="mood_@mood" />
+                        <label for="mood_@mood" class="form-check-label">@mood.ToString()</label>
+                    </div>
+                }
+            </div>
+            <span asp-validation-for="Mood" class="text-danger"></span>
+        </fieldset>
+        <fieldset class="border p-3 mb-3">
+            <legend class="w-auto px-2">Tags</legend>
+    
+            <!-- Selected tags display -->
+            <div id="selected-tags-display" class="mb-3">
+                <div id="tag-badges" class="mb-2">
+                    <!-- Selected tags will appear here as badges -->
+                </div>
+            </div>
+    
+            <!-- Available tags -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">Select tags:</label>
+                <div class="row">
+                    @foreach (var tag in Model.AvailableTags)
+                    {
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="form-check">
+                                <input type="checkbox" 
+                                       class="form-check-input tag-checkbox" 
+                                       value="@tag.Id" 
+                                       id="tag_@tag.Id" 
+                                       data-tag-name="@tag.Name" />
+                                <label for="tag_@tag.Id" class="form-check-label">
+                                    @tag.Name
+                                </label>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+    
+            <!-- New tag input -->
+            <div class="mb-3">
+                <label asp-for="NewTagName" class="form-label fw-bold">Create new tag:</label>
+                <div class="input-group">
+                    <input asp-for="NewTagName" 
+                           class="form-control" 
+                           placeholder="Enter new tag name..." 
+                           maxlength="50" />
+                    <button type="button" id="add-new-tag" class="btn btn-outline-success">
+                        <i class="fas fa-plus"></i> Add New
+                    </button>
+                </div>
+            </div>
+    
+            <!-- Hidden fields for selected tag IDs -->
+            <div id="selected-tag-inputs"></div>
+        </fieldset>
+        
+
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save"></i> Save
+            </button>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/CreateJournalEntry.js"></script>
+}

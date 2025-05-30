@@ -1,0 +1,31 @@
+﻿@model MindSpace.Presentation.Mvc.Models.JournalEntry.UserJournalEntryViewModel
+
+
+<div class="forum-item active p-3 mb-3 bg-white shadow-sm rounded">
+    <div class="row align-items-center">
+        <div class="col-md-9">
+            <div class="d-flex align-items-center mb-2">
+                <div class="forum-icon me-3">
+                    <i class="fa fa-shield fa-lg text-primary"></i>
+                </div>
+                <a href="#" class="forum-item-title text-decoration-none">@Model.Title</a>
+            </div>
+            <div class="forum-sub-title text-muted">@Model.Content</div>
+            <div class="mt-2">
+                @foreach (var tag in Model.Tags)
+                {
+                    <span class="badge bg-primary me-2">@tag</span>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-2 text-center">
+            <div class="text-muted small">Mood</div>
+            <span class="views-number text-primary">@Model.Mood</span>
+        </div>
+
+        <div class="col-md-1 text-end text-muted small">
+            @Model.Date
+        </div>
+    </div>
+</div>
