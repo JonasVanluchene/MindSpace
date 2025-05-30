@@ -8,10 +8,40 @@
         <a asp-action="Create" class="btn btn-primary">+ Add Entry</a>
     </div>
 
-    <div class="ibox-content forum-container p-0">
+    <div class="journal-container">
         @foreach (var entry in Model.JournalEntriesViewModels)
         {
             <partial name="JournalEntryListItemPartial" model="entry" />
         }
     </div>
 </div>
+
+@section Modals {
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0">Are you sure you want to delete <span id="entry-title"></span>? This action cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <form method="post" asp-action="Delete">
+                        <input type="hidden" name="Id" />
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger" id="confirmDelete">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts
+{
+    <script src="~/js/deleteModal.js">
+        
+    </script>
+}
