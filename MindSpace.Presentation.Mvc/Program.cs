@@ -14,7 +14,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDefaultIdentity<User>(options =>
     {
         //options.SignIn.RequireConfirmedAccount = true;
-
+        options.User.RequireUniqueEmail = true;
     })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<MindSpaceDbContext>()

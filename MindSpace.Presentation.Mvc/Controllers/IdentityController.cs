@@ -50,8 +50,20 @@ namespace MindSpace.Ui.Mvc.Controllers
             {
                 return View();
             }
+            User? user = await _userManager.FindByNameAsync(signInModel.Login);
+            if (user == null)
+            {
+                user = await _userManager.FindByEmailAsync(signInModel.Login);
+            }
 
-            var result = await _signInManager.PasswordSignInAsync(signInModel.Email, signInModel.Password, signInModel.RememberMe, lockoutOnFailure: false);
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View();
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(user.UserName, signInModel.Password, signInModel.RememberMe, lockoutOnFailure: false);
+            
             if (!result.Succeeded)
             {
                 ModelState.AddModelError("", "Username/Password combination is incorrect");
